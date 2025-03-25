@@ -1,9 +1,9 @@
 "use client"
 import { useRouter } from 'next/navigation';
 import React, { ReactElement, useState } from 'react'
-import { login, LoginResponse } from '../actions/login';
+import { login, LoginResponse } from '../_actions/login';
 import { LoaderCircle } from 'lucide-react';
-import Toast from '../../components/toast';
+import Toast from '../../_components/toast';
 
 export default function LoginForm(): ReactElement {
 
@@ -60,7 +60,7 @@ export default function LoginForm(): ReactElement {
                                 </button>
                                 <a href="#" className='text-sm text-[#89ccc5] hover:underline'>¿Olvidaste tu contraseña?</a>
                             </div>
-                            <button className='w-full bg-[#89ccc5] text-white py-2 rounded-md hover:bg-[#78b2a8] transition duration-300'>Crear cuenta</button>
+                            <button type='button' onClick={() => { router.push('/signup'); }} className='w-full bg-[#89ccc5] text-white py-2 rounded-md hover:bg-[#78b2a8] transition duration-300'>Crear cuenta</button>
                         </form>
                     </div>
                 </div>

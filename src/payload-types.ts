@@ -180,6 +180,12 @@ export interface Media {
  */
 export interface Customer {
   id: string;
+  firstName: string;
+  lastName: string;
+  dni: string;
+  born: string;
+  residence: string;
+  phone: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -300,6 +306,12 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "customers_select".
  */
 export interface CustomersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  dni?: T;
+  born?: T;
+  residence?: T;
+  phone?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
