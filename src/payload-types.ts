@@ -71,6 +71,8 @@ export interface Config {
     users: User;
     media: Media;
     customers: Customer;
+    specialty: Specialty;
+    doctors: Doctor;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     customers: CustomersSelect<false> | CustomersSelect<true>;
+    specialty: SpecialtySelect<false> | SpecialtySelect<true>;
+    doctors: DoctorsSelect<false> | DoctorsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -199,6 +203,45 @@ export interface Customer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialty".
+ */
+export interface Specialty {
+  id: string;
+  name: string;
+  color: string;
+  /**
+   * Este campo se genera automáticamente, no lo modifiques
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctors".
+ */
+export interface Doctor {
+  id: string;
+  name: string;
+  specialty: string | Specialty;
+  description?: string | null;
+  featured: boolean;
+  image?: (string | null) | Media;
+  schedule: ('lunes-viernes' | 'lunes-miercoles' | 'miercoles-viernes' | 'sabado - domingo')[];
+  workingHours:
+    | '8:00am-5:00pm'
+    | '9:00am-6:00pm'
+    | '10:00am-7:00pm'
+    | '11:00am-8:00pm'
+    | '12:00pm-9:00pm'
+    | '1:00pm-10:00pm';
+  ubication: string;
+  price: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -215,6 +258,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'customers';
         value: string | Customer;
+      } | null)
+    | ({
+        relationTo: 'specialty';
+        value: string | Specialty;
+      } | null)
+    | ({
+        relationTo: 'doctors';
+        value: string | Doctor;
       } | null);
   globalSlug?: string | null;
   user:
@@ -321,6 +372,34 @@ export interface CustomersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialty_select".
+ */
+export interface SpecialtySelect<T extends boolean = true> {
+  name?: T;
+  color?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctors_select".
+ */
+export interface DoctorsSelect<T extends boolean = true> {
+  name?: T;
+  specialty?: T;
+  description?: T;
+  featured?: T;
+  image?: T;
+  schedule?: T;
+  workingHours?: T;
+  ubication?: T;
+  price?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

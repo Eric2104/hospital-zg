@@ -43,10 +43,10 @@ export default function SignupForm(): ReactElement {
             <div>
                 <div className='lg:flex items-center justify-around h-screen w-full'>
                     <div className='flex justify-center items-center lg:w-5/12 '>
-                        <img src="../logo.svg" alt="logo" className='w-[25vw] lg:w-[20vw] lg:translate-x-12 mt-8 lg:mt-0' />
+                        <img src="../logo.svg" alt="logo" className='w-[22vw] lg:w-[20vw] lg:translate-x-12 mt-8 lg:mt-0' />
                     </div>
-                    <div className='lg:mt-0 px-8 pt-8 lg:pt-0 lg:w-7/12 lg:pr-[14rem]'>
-                        <h2 className='text-3xl font-bold mb-8 text-zinc-700 text-center'>Formulario de <span className='text-[#89ccc5] '>registro</span></h2>
+                    <div className='lg:mt-0 px-8 pt-4 lg:pt-0 lg:w-7/12 lg:pr-[14rem]'>
+                        <h2 className='text-3xl font-bold mb-4 text-zinc-700 text-center'>Formulario de <span className='text-[#89ccc5] '>registro</span></h2>
                         <form className="items-center space-y-2" onSubmit={handleSubmit}>
                             <input type="text" placeholder='Nombre/s' name="firstName" id="firstName" className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#89ccc5]' />
                             <input type="text" placeholder='Apellido/s' name="lastName" id="lastName" className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#89ccc5]' />

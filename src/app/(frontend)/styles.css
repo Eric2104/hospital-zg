@@ -66,3 +66,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.slick-slide > div{
+  margin:0 10px;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+  scrollbar-width: none; /* Para Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Para Chrome, Safari y Opera */
+}

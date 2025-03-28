@@ -12,14 +12,14 @@ const HeaderDashborad = () => {
 
     return (
         <div className='relative mb-2'>
-            <header className="sticky z-40 py-2 px-4 flex justify-between items-center bg-white shadow">
+            <header className="sticky z-40 py-2 px-2 lg:w-[96vw] mx-auto flex justify-between items-center bg-white">
                 <Link href={"/#"}>
                     <Image
                         src="/logo.svg"
                         alt="Logo"
                         width={64}
                         height={64}
-                        className="object-contain w-[14vw] lg:w-[4vw] hover:opacity-90 transition-opacity duration-300"
+                        className="object-contain w-[4rem] lg:w-[3vw] hover:opacity-90 transition-opacity duration-300"
                     />
                 </Link>
                 <User size={34} className="hidden lg:block text-gray-600 hover:text-gray-800 transition-colors duration-300 cursor-pointer" />

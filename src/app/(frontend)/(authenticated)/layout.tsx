@@ -2,8 +2,7 @@ import { redirect } from 'next/navigation';
 import React, { FC, ReactNode } from 'react';
 import { getUser } from './_actions/getUser';
 import HeaderDashborad from './_components/header';
-import Navbar from './_components/navBar';
-import DoctorSeacher from './_components/doctorSeacher';
+import ClientProvider from '../_components/clientProvider';
 
 interface LayoutProps {
     children: ReactNode;
@@ -11,17 +10,22 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = async ({ children }) => {
     const user = await getUser();
-    console.log(user);
+
     if (!user) {
         redirect('/login');
         return null;
     }
+
     return (
         <div>
-            <HeaderDashborad />
-            {children}
+            <ClientProvider user={user}>
+                <HeaderDashborad />
+                {children}
+            </ClientProvider>
+            {/* <HeaderDashborad />
+            {children} */}
         </div>
-    )
-}
+    );
+};
 
 export default Layout;

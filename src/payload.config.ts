@@ -13,9 +13,13 @@ import { Media } from './collections/Media'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { Customers } from './collections/Customers'
 import brevoAdapter from './utils/brevoAdapter'
+import { Specialty } from './collections/Specialty'
+import { Doctors } from './collections/Doctors'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+
 
 export default buildConfig({
   admin: {
@@ -26,7 +30,7 @@ export default buildConfig({
   },
   // system to send emails with brevo example: forgot password (no working)
   email: brevoAdapter(),
-  collections: [Users, Media, Customers],
+  collections: [Users, Media, Customers, Specialty, Doctors],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -40,11 +44,9 @@ export default buildConfig({
     payloadCloudPlugin(),
     // config-3s-storage
     s3Storage({
-      // collections to enable s3 storage for
       collections: {
         media: true
       },
-      //config for s3 storage
       bucket: process.env.S3_BUCKET_NAME || '',
       config: {
         region: process.env.S3_REGION || '',
@@ -52,7 +54,7 @@ export default buildConfig({
           accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
           secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
         }
-      }
+      },
     })
   ],
 })
