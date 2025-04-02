@@ -19,11 +19,9 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
     return (
         <div>
             <ClientProvider user={user}>
-                <HeaderDashborad />
+                <HeaderDashborad userId={user.id} />
                 {children}
             </ClientProvider>
-            {/* <HeaderDashborad />
-            {children} */}
         </div>
     );
 };

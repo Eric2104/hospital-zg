@@ -6,7 +6,7 @@ import Navbar from "./navBar";
 import { useState } from "react";
 
 
-const HeaderDashborad = () => {
+const HeaderDashborad = ({ userId }: { userId: string }) => {
 
     const [openMenu, setOpenMenu] = useState(false);
 
@@ -19,7 +19,7 @@ const HeaderDashborad = () => {
                         alt="Logo"
                         width={64}
                         height={64}
-                        className="object-contain w-[4rem] lg:w-[3vw] hover:opacity-90 transition-opacity duration-300"
+                        className="object-contain w-[3rem] lg:w-[3vw] hover:opacity-90 transition-opacity duration-300"
                     />
                 </Link>
                 <User size={34} className="hidden lg:block text-gray-600 hover:text-gray-800 transition-colors duration-300 cursor-pointer" />
@@ -32,7 +32,7 @@ const HeaderDashborad = () => {
 
                 </button>
             </header>
-            <Navbar openMenu={openMenu} />
+            <Navbar openMenu={openMenu} userId={userId} />
         </div>
     );
 };

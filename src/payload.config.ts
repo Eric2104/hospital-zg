@@ -15,6 +15,7 @@ import { Customers } from './collections/Customers'
 import brevoAdapter from './utils/brevoAdapter'
 import { Specialty } from './collections/Specialty'
 import { Doctors } from './collections/Doctors'
+import { Appointments } from './collections/Appoiments'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,7 +31,7 @@ export default buildConfig({
   },
   // system to send emails with brevo example: forgot password (no working)
   email: brevoAdapter(),
-  collections: [Users, Media, Customers, Specialty, Doctors],
+  collections: [Users, Media, Customers, Specialty, Doctors, Appointments],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

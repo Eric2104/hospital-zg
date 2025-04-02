@@ -73,6 +73,7 @@ export interface Config {
     customers: Customer;
     specialty: Specialty;
     doctors: Doctor;
+    appointments: Appointment;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -84,6 +85,7 @@ export interface Config {
     customers: CustomersSelect<false> | CustomersSelect<true>;
     specialty: SpecialtySelect<false> | SpecialtySelect<true>;
     doctors: DoctorsSelect<false> | DoctorsSelect<true>;
+    appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -188,8 +190,16 @@ export interface Customer {
   lastName: string;
   dni: string;
   born: string;
+  /**
+   * This field is read only and is calculated automatically
+   */
+  years: number;
   residence: string;
   phone: number;
+  bloodType?: ('---' | 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-') | null;
+  allergies?: string | null;
+  cronicDiseases?: string | null;
+  medications?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -242,6 +252,20 @@ export interface Doctor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments".
+ */
+export interface Appointment {
+  id: string;
+  schedule: string;
+  idDoctor: string | Doctor;
+  idCustomer: string | Customer;
+  time: string;
+  status: 'pending' | 'completed' | 'canceled';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -266,6 +290,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'doctors';
         value: string | Doctor;
+      } | null)
+    | ({
+        relationTo: 'appointments';
+        value: string | Appointment;
       } | null);
   globalSlug?: string | null;
   user:
@@ -361,8 +389,13 @@ export interface CustomersSelect<T extends boolean = true> {
   lastName?: T;
   dni?: T;
   born?: T;
+  years?: T;
   residence?: T;
   phone?: T;
+  bloodType?: T;
+  allergies?: T;
+  cronicDiseases?: T;
+  medications?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -398,6 +431,19 @@ export interface DoctorsSelect<T extends boolean = true> {
   workingHours?: T;
   ubication?: T;
   price?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments_select".
+ */
+export interface AppointmentsSelect<T extends boolean = true> {
+  schedule?: T;
+  idDoctor?: T;
+  idCustomer?: T;
+  time?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }

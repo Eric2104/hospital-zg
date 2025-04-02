@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useEffect } from 'react';
 import useUserStore from '@/store/userStore';
+import { FC, useEffect } from 'react';
 
 interface ClientProviderProps {
-    user: any; // Cambia `any` por el tipo adecuado de tu usuario
+    user: any; // Cambia `any` por el tipo adecuado
     children: React.ReactNode;
 }
 
-const ClientProvider: React.FC<ClientProviderProps> = ({ user, children }) => {
+const ClientProvider: FC<ClientProviderProps> = ({ user, children }) => {
     const setUser = useUserStore((state) => state.setUser);
 
     useEffect(() => {
