@@ -89,10 +89,8 @@ const Page = () => {
                             <p className="text-stone-700">{docInfo ? docInfo.docs[0].specialty.name : "Cargando..."}</p>
                         </div>
                     </div>
-                    <div className="w-1/2 lg:w-full h-[250px] lg:h-[60vh] overflow-hidden">
-                        {docInfo && (
-                            <img src={`${docInfo.docs[0].image.url}`} alt={docInfo.docs[0].image.string} className="object-cover w-full h-full" />
-                        )}
+                    <div className="w-1/2 lg:w-full h-[250px] lg:h-[60vh] overflow-hidden rounded-lg">
+                        <img src={`${docInfo?.docs[0].image.url}`} alt={docInfo?.docs[0].image.string} className="object-scale-down w-full h-fullp-4" />
                     </div>
                 </div>
                 <div className="lg:order-1">

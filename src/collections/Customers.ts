@@ -110,6 +110,17 @@ export const Customers: CollectionConfig = {
             label: "Medications",
             type: "text",
             defaultValue: "---",
+        },
+        {
+            name: "role",
+            type: "select",
+            options: [
+                { label: "doctor", value: "doctor" },
+                { label: "customer", value: "customer" }
+            ],
+            defaultValue: "customer",
+            hidden: true,
+
         }
     ]
 }

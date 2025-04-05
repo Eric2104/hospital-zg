@@ -65,6 +65,7 @@ export interface Config {
   auth: {
     users: UserAuthOperations;
     customers: CustomerAuthOperations;
+    doctors: DoctorAuthOperations;
   };
   blocks: {};
   collections: {
@@ -102,6 +103,9 @@ export interface Config {
       })
     | (Customer & {
         collection: 'customers';
+      })
+    | (Doctor & {
+        collection: 'doctors';
       });
   jobs: {
     tasks: unknown;
@@ -127,6 +131,24 @@ export interface UserAuthOperations {
   };
 }
 export interface CustomerAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface DoctorAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -200,6 +222,7 @@ export interface Customer {
   allergies?: string | null;
   cronicDiseases?: string | null;
   medications?: string | null;
+  role?: ('doctor' | 'customer') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -247,8 +270,17 @@ export interface Doctor {
     | '1:00pm-10:00pm';
   ubication: string;
   price: number;
+  role?: ('doctor' | 'customer') | null;
   updatedAt: string;
   createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -261,6 +293,7 @@ export interface Appointment {
   idCustomer: string | Customer;
   time: string;
   status: 'pending' | 'completed' | 'canceled';
+  reason?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -304,6 +337,10 @@ export interface PayloadLockedDocument {
     | {
         relationTo: 'customers';
         value: string | Customer;
+      }
+    | {
+        relationTo: 'doctors';
+        value: string | Doctor;
       };
   updatedAt: string;
   createdAt: string;
@@ -322,6 +359,10 @@ export interface PayloadPreference {
     | {
         relationTo: 'customers';
         value: string | Customer;
+      }
+    | {
+        relationTo: 'doctors';
+        value: string | Doctor;
       };
   key?: string | null;
   value?:
@@ -396,6 +437,7 @@ export interface CustomersSelect<T extends boolean = true> {
   allergies?: T;
   cronicDiseases?: T;
   medications?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -431,8 +473,16 @@ export interface DoctorsSelect<T extends boolean = true> {
   workingHours?: T;
   ubication?: T;
   price?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -444,6 +494,7 @@ export interface AppointmentsSelect<T extends boolean = true> {
   idCustomer?: T;
   time?: T;
   status?: T;
+  reason?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -50,6 +50,12 @@ export const Appointments: CollectionConfig = {
             ],
             defaultValue: "pending",
             required: true,
-        }
+        },
+        {
+            name: "reason",
+            type: "text",
+            label: "Motivo",
+            defaultValue: "Consulta"
+        },
     ],
 }

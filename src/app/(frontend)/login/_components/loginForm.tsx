@@ -23,9 +23,12 @@ export default function LoginForm(): ReactElement {
         const result: LoginResponse = await login({ email, password });
         setIsPending(false);
 
-        if (result?.success) {
+        if (result?.success && result?.userType === 'customer') {
             router.push('/dashboard');
-        } else {
+        } else if (result?.success && result?.userType === 'doctor') {
+            router.push('/doctor');
+        }
+        else {
             setError('Valide la información ingresada');
         }
     }

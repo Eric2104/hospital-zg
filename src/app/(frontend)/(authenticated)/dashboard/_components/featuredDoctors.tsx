@@ -1,4 +1,3 @@
-import { CalendarRange } from "lucide-react";
 import { getFeaturedDoctors } from "../../_actions/getFeaturedDoctors";
 import Carousel from "../../_components/carousel";
 import Image from "next/image";
@@ -26,7 +25,6 @@ interface FeaturedDocsProps {
 const FeatureDoctors = async () => {
 
     const featuredDocs: FeaturedDocsProps = await getFeaturedDoctors();
-    console.log(featuredDocs.docs);
     return (
         <div className="mt-0">
             <Carousel dotsProp={false} slideToShowProp={6} slidesToScrollProp={6} infiniteProp={false}>

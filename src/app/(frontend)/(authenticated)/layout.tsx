@@ -19,7 +19,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
     return (
         <div>
             <ClientProvider user={user}>
-                <HeaderDashborad userId={user.id} />
+                {user.role === "customer" && <HeaderDashborad userId={user.id} />}
                 {children}
             </ClientProvider>
         </div>

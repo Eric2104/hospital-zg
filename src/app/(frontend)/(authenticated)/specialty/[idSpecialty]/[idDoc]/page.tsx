@@ -41,8 +41,8 @@ const Page = async ({ params }: { params: { idSpecialty: string, idDoc: string }
                             <p className="text-stone-700">{doctorSpecialty.docs[0].specialty.name}</p>
                         </div>
                     </div>
-                    <div className="w-1/2 lg:w-full h-[250px] lg:h-[60vh] overflow-hidden">
-                        <img src={`${doctorSpecialty.docs[0].image.url}`} alt={doctorSpecialty.docs[0].image.string} className="object-cover w-full h-full" />
+                    <div className="w-1/2 lg:w-full h-[250px] lg:h-[60vh] overflow-hidden p-4 rounded-lg">
+                        <img src={`${doctorSpecialty.docs[0].image.url}`} alt={doctorSpecialty.docs[0].image.string} className="object-scale-down w-full h-fullp-4" />
                     </div>
                 </div>
                 <div className="lg:order-1 lg:pt-[2rem]">

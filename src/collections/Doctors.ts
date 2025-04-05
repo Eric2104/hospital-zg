@@ -6,6 +6,7 @@ export const Doctors: CollectionConfig = {
         singular: "Doctor",
         plural: "Doctores",
     },
+    auth: true,
     fields: [
         {
             name: "name",
@@ -79,6 +80,17 @@ export const Doctors: CollectionConfig = {
             required: true,
             min: 0,
             defaultValue: 0,
+        },
+        {
+            name: "role",
+            type: "select",
+            options: [
+                { label: "doctor", value: "doctor" },
+                { label: "customer", value: "customer" }
+            ],
+            defaultValue: "doctor",
+            hidden: true,
+
         }
     ],
 

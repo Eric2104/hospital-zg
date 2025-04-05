@@ -15,6 +15,7 @@ interface LoginParams {
 export interface LoginResponse {
     success: boolean;
     error?: string;
+    userType?: "customer" | "doctor";
 }
 
 export type Result = {
@@ -28,30 +29,45 @@ export async function login({ email, password }: LoginParams): Promise<LoginResp
     const payload = await getPayload({ config }); // Obtiene la instancia de payload con la configuración
 
     try {
-
-        // Intenta realizar el login con los datos proporcionados
-        const result: Result = await payload.login({
+        // Intenta realizar el login con la colección "customers"
+        const resultCustomer: Result = await payload.login({
             collection: "customers",
             data: { email, password },
         });
 
-        console.log("Login result:", result); // Registro de depuración
-
-        // Si el login es exitoso, guarda el token en una cookie
-        if (result.token) {
+        if (resultCustomer.token) {
             const cookieStore = await cookies();
-            cookieStore.set("payload-token", result.token, {
+            cookieStore.set("payload-token", resultCustomer.token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                path: "/",
+
+            });
+            return { success: true, userType: "customer" }; // Retorna éxito con tipo de usuario
+        }
+    } catch (error) {
+        console.warn("Customer login failed, trying doctor login...");
+    }
+
+    try {
+        // Si falla el login con "customers", intenta con la colección "doctors"
+        const resultDocs = await payload.login({
+            collection: "doctors",
+            data: { email, password },
+        });
+
+        if (resultDocs.token) {
+            const cookieStore = await cookies();
+            cookieStore.set("payload-token", resultDocs.token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 path: "/",
             });
-            return { success: true }; // Retorna éxito
-        } else {
-            return { success: false, error: "Invalid email or password" }; // Retorna error si las credenciales son inválidas
+            return { success: true, userType: "doctor" }; // Retorna éxito con tipo de usuario
         }
-
     } catch (error) {
-        console.error("Error logging in", error);
-        return { success: false, error: "An unexpected error occurred" }; // Retorna error si ocurre un problema inesperado
+        console.error("Doctor login failed", error);
     }
+
+    return { success: false, error: "Invalid email or password" }; // Retorna error si ambos intentos fallan
 }
