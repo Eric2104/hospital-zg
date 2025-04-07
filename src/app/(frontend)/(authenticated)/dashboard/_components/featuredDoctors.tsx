@@ -30,8 +30,14 @@ const FeatureDoctors = async () => {
             <Carousel dotsProp={false} slideToShowProp={6} slidesToScrollProp={6} infiniteProp={false}>
                 {featuredDocs.docs.map((item) => (
                     <div key={`carousel-item-${item.id}`} className="w-full text-black ">
-                        <div className="bg-[#89ccc5] rounded-xl lg:h-[14rem] overflow-hidden" >
-                            <Image src={item.image.url} width={250} height={250} alt={item.name} className="rounded-xl" />
+                        <div className="bg-[#89ccc5] rounded-xl h-[14rem] overflow-hidden" >
+                            <Image
+                                src={item.image.url}
+                                width={250}
+                                height={250}
+                                alt={item.name}
+                                className="object-cover h-full rounded-xl object-top"
+                            />
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <p className="text-sm lg:text-lg text-center font-semibold mt-2">Dr. {item.name}</p>

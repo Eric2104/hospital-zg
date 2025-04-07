@@ -84,7 +84,7 @@ const Page = async ({ params }: { params: { idSpecialty: string } }) => {
                                 <img
                                     src={doctor.image.url}
                                     alt="Doctor Image"
-                                    className="object-fill w-full"
+                                    className="object-cover w-full object-top"
                                 />
                             </div>
                             <div className="flex flex-col justify-center ml-4">

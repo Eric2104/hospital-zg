@@ -17,7 +17,7 @@ const Carousel = ({
     infiniteProp = true,
     speedProp = 500,
     slideToShowProp = 3,
-    slidesToScrollProp = 3,
+    slidesToScrollProp = 1,
     children
 }: CarouselProps) => {
 
@@ -29,6 +29,7 @@ const Carousel = ({
         slidesToScroll: slidesToScrollProp,
         orientation: "horizontal",
         initialSlide: 0,
+
         responsive: [
             {
                 breakpoint: 1024,

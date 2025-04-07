@@ -1,4 +1,5 @@
-import { getUserAppoinment } from "./actions/getUserAppoinment";
+import CancelButton from "../components/cancelButton";
+import { getUserAppoinment } from "../actions/getUserAppoinment";
 
 interface Appointment {
     id: string;
@@ -26,10 +27,10 @@ const Record = async ({ params }: { params: { idUser: string } }) => {
 
     const appointments: AppointmentsProps = await getUserAppoinment({ idUser });
 
-    const completedAppointments = appointments.docs.filter(cita => cita.status === "completed") || null;
+    const completedAppointments = appointments.docs.filter(cita => cita.status === "completed" || cita.status === "canceled") || null;
     const pendingAppointments = appointments.docs.filter(cita => cita.status === "pending");
-    console.log("A")
-    console.log(pendingAppointments)
+
+
 
     return (
         <div className="w-[96vw] mx-auto px-2 my-2">
@@ -41,11 +42,11 @@ const Record = async ({ params }: { params: { idUser: string } }) => {
                         {pendingAppointments.length > 0 ? (
                             pendingAppointments.map((appointment: Appointment, index: number) => {
                                 return (
-                                    <div key={`appoinment-pending-${index}`} className="text-start px-2 py-2 space-y-4 border rounded-lg border-stone-200">
+                                    <div key={`appoinment-pending-${index}`} className="text-start px-2 py-2 space-y-4 border rounded-lg border-stone-200 bg-stone-100 h-32">
                                         <h3 className="text-lg font-bold text-[#4a90e2]">{appointment.idDoctor.specialty.name} - Dr. {appointment.idDoctor.name}</h3>
                                         <p className="text-sm text-stone-600">Fecha: {appointment.schedule} - {appointment.time}</p>
                                         <div className="w-full flex items-center">
-                                            <button className="text-sm text-white bg-[#e77d75] hover:bg-[#f08780] px-3 py-1 rounded-xl w-4/5 lg:w-2/3 mx-auto">Cancelar</button>
+                                            <CancelButton idAppoinment={appointment.id} />
                                         </div>
                                     </div>
                                 );
@@ -58,22 +59,28 @@ const Record = async ({ params }: { params: { idUser: string } }) => {
                 </div>
                 <div className=" text-center">
                     <p className="text-2xl text-stone-700 py-2">Anteriores</p>
-                    {completedAppointments.length > 0 ? (
-                        completedAppointments.map((appointment: Appointment, index: number) => {
-                            return (
-                                <div key={`appoinment-complete-${index}`} className="text-start px-2 py-2 space-y-4 border rounded-lg border-stone-200 bg-green-100">
-                                    <h3 className="text-lg font-bold text-[#4a90e2]">{appointment.idDoctor.specialty.name} - Dr. {appointment.idDoctor.name}</h3>
-                                    <p className="text-sm text-stone-600">Fecha {appointment.schedule} - {appointment.time}</p>
-                                    <div className="w-full flex items-center">
-                                        <button type="button" className="text-sm text-white bg-red-500 hover:bg-red-600 px-3 py-1 rounded-xl w-4/5 lg:w-2/3 mx-auto">Cancelar</button>
+                    <div className="space-y-3">
+                        {completedAppointments.length > 0 ? (
+                            completedAppointments.map((appointment: Appointment, index: number) => {
+                                return (
+                                    <div key={`appoinment-complete-${index}`} className={`text-start px-2 py-2 space-y-4 border rounded-lg border-stone-200 h-32 ${(appointment.status === "completed") ? "bg-emerald-100" : "bg-red-100"}`}>
+                                        <div className="flex flex-col justify-center h-full">
+                                            <h3 className="text-lg font-bold text-[#4a90e2] ">{appointment.idDoctor.specialty.name} - Dr. {appointment.idDoctor.name}</h3>
+                                            <p className="text-sm text-stone-600 ">Fecha {appointment.schedule} - {appointment.time}</p>
+                                            <p
+                                                className={`text-sm font-semibold px-2 py-1 rounded-lg text-slate-700 text-center`}
+                                            >
+                                                {appointment.status === "completed" ? "Completado" : "Cancelado"}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })
-                    )
-                        :
-                        <p>No hay citas registrada</p>
-                    }
+                                );
+                            })
+                        )
+                            :
+                            <p>No hay citas registrada</p>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

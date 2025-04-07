@@ -57,7 +57,7 @@ const RecordInfoPatient = ({ patients }: { patients: PatientInfoProps }) => {
                                     {/* Mobile */}
                                     <button
                                         onClick={() => handleMobileToggle(patientInfo.id)}
-                                        className="lg:hidden bg-[#89ccc5] py-2 px-2 rounded-md text-stone-100 text-base"
+                                        className="lg:hidden bg-[#89ccc5] py-2 px-2 rounded-md text-stone-100 text-sm lg:text-base"
                                     >
                                         Ver expediente
                                     </button>
@@ -78,7 +78,7 @@ const RecordInfoPatient = ({ patients }: { patients: PatientInfoProps }) => {
             </div>
 
             {/* Mostrar solo en escritorio */}
-            <div className="hidden lg:block w-full bg-[#d6ebe9] p-4 rounded-lg shadow-md">
+            <div className="hidden lg:block w-full h-[21.5rem] bg-[#d6ebe9] p-4 rounded-lg shadow-md">
 
                 {selectedPatient ? (
                     <RecordPatient patientInfo={selectedPatient} setSelectedPatient={setSelectedPatient} />

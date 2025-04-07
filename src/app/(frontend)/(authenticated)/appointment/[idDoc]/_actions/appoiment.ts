@@ -10,6 +10,7 @@ interface AppoimentParams {
     time: string;
     idCustomer: string;
     idDoctor: string;
+    reason: string;
 }
 
 export interface AppoimentResponse {
@@ -22,14 +23,14 @@ export type Result = {
 }
 
 // Función asíncrona para manejar el login
-export async function appoiment({ schedule, time, idCustomer, idDoctor }: AppoimentParams): Promise<AppoimentResponse> {
+export async function appoiment({ schedule, time, idCustomer, idDoctor, reason }: AppoimentParams): Promise<AppoimentResponse> {
     const payload = await getPayload({ config });
     const status = "pending"
     try {
         // Intenta realizar el login con los datos proporcionados
         const result: Result = await payload.create({
             collection: "appointments",
-            data: { schedule, time, idCustomer, idDoctor, status },
+            data: { schedule, time, idCustomer, idDoctor, status, reason },
         });
 
         if (result) {

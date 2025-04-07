@@ -2,11 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { getDoctorLogged } from "../_actions/getDoctorLogged";
 import TimerHeader from "./TimerHeader";
+import { LogOut } from "lucide-react";
+import { logout } from "../../_actions/logout";
+import LogoutButton from "../../_components/logoutButton";
 
 
 const Header = async () => {
 
     const doc = await getDoctorLogged()
+
 
     return (
         <div className='relative mb-2'>
@@ -20,6 +24,7 @@ const Header = async () => {
                         className="object-contain w-[3rem] lg:w-[3vw] hover:opacity-90 transition-opacity duration-300"
                     />
                 </Link>
+                <LogoutButton />
             </header>
             <div className="grid lg:grid-cols-2 px-4 lg:px-10">
                 <div className="text-2xl lg:text-4xl w-full">

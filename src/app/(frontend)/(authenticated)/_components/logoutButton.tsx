@@ -30,7 +30,7 @@ export default function LogoutButton() {
 
     return (
         <div>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="text-red-400">{error}</p>}
             <button
                 onClick={handleLogout}
                 disabled={isPending}

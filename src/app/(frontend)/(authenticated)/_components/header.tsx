@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Menu, User, X } from "lucide-react";
 import Navbar from "./navBar";
 import { useState } from "react";
+import LogoutButton from "./logoutButton";
 
 
 const HeaderDashborad = ({ userId }: { userId: string }) => {
@@ -22,7 +23,7 @@ const HeaderDashborad = ({ userId }: { userId: string }) => {
                         className="object-contain w-[3rem] lg:w-[3vw] hover:opacity-90 transition-opacity duration-300"
                     />
                 </Link>
-                <User size={34} className="hidden lg:block text-gray-600 hover:text-gray-800 transition-colors duration-300 cursor-pointer" />
+                <LogoutButton />
                 <button
                     type="button"
                     onClick={() => { setOpenMenu(!openMenu) }}

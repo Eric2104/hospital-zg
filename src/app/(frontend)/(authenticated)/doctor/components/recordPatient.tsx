@@ -37,7 +37,7 @@ const RecordPatient = ({ patientInfo, setSelectedPatient }: { patientInfo: Patie
     return (
         <div className="relative">
             <p className="text-xl font-bold mb-2">Expediente Médico</p>
-            <button className="absolute top-0 right-2" onClick={() => setSelectedPatient(null)}>
+            <button className="absolute top-0 right-2 hidden lg:block" onClick={() => setSelectedPatient(null)}>
                 <X />
             </button>
 
